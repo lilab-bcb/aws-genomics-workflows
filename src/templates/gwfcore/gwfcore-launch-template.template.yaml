@@ -49,16 +49,17 @@ Resources:
   EC2LaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
-      LaunchTemplateName: 
-        Fn::Join: 
+      LaunchTemplateName:
+        Fn::Join:
           - "-"
           - - !Ref LaunchTemplateNamePrefix
             - Fn::If:
                 - NoNamespace
                 - !Select [2, !Split ["/", !Ref "AWS::StackId" ]]
                 - !Ref Namespace
-        
+
       LaunchTemplateData:
+        ImageId: "ami-0e403224d21661ede"
         # Used in tandem with UserData to check if the instance is provisioned
         # correctly. It is important to terminate mis-provisioned instances before
         # jobs are placed on them
